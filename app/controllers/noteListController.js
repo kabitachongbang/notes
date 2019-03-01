@@ -10,7 +10,7 @@
     function NoteListController($scope, $location, factoryService) {
 
         $scope.notes = factoryService.getNotes();
-        $scope.noteObj = { title: '', description: '' };
+        $scope.noteObj = { title: '', description: '', id: '' };
 
 
         $scope.createNotes = function () {
