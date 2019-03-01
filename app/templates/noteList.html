@@ -1,0 +1,44 @@
+<header class="text-center text-primary">
+    <h2><strong>Welcome to my notes</strong></h2>
+</header>
+<div class="container">
+    <div class="row ">
+        <div class="notesHome col-md-12 ">
+            <div class="row borders">
+                <div class="col">
+                    <span class="float-left"><button ng-click="createNotes()" class="btn btn-primary-outline">
+                            <i class="far fa-edit"></i></button></span>
+                    <span> <button type="button" ng-click="clearNotes()"
+                            class="btn  btn-primary-outline float-right btn-lg"><i
+                                class="fa fa-times"></i></button></span>
+                </div>
+            </div>
+            <div class="row borders no-gutters">
+                <div class="input-group"> <button class="btn btn-primary-outline disabled"><i class="fas fa-search"
+                            aria-hidden="true"></i></button>
+
+                    <input type="text" ng-model="findNotes" class="form-control input-group-form"
+                        placeholder=" search all notes..">
+                </div>
+            </div>
+
+            <div class="row borders">
+                <div class="col-md-12">
+                    <ul class="list-group-flush list-style-none">
+                        <li class="list-group-item text-capitalize"
+                            ng-repeat="item in notes |filter:findNotes   track by $index ">
+                            <span class="btn-group " role="group">
+                                <button class="btn" ng-click="editItem($index)">edit</button>
+                                <button class="btn " ng-click="deleteItem($index)"><i
+                                        class="fa fa-times"></i></button></span>
+
+                            <h3>{{item.title }}</h3><br>
+                            {{item.description}}
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

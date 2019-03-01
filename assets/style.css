@@ -14,8 +14,9 @@ border-bottom:1px solid rgb(201, 197, 197);
  .form-control:focus{
 border:1px solid greenyellow;
 box-shadow:0 0 0 0.1rem rgb(186, 221, 134);
+font-style:normal;
 }
 
-
-
-
+.btn-link:hover{
+    text-decoration: none;
+}

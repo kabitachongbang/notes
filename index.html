@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
-
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-route.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -22,12 +22,17 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style.css">
 
 
 </head>
 
-<body ng-app="notesApp" ng-controller="MainCtrl as ctrl">
+<body ng-app="notesApp">
+    Choose:
+    <a href="#!/"> <button type="button" class="btn ">List of notes</button></a>
+    <a href="#!/addNote"> <button type="button" class="btn ">add/edit note</button></a>
+    <div ng-view></div>
+    <!-- 
     <header class="text-center text-primary">
         <h2><strong>Welcome to my notes</strong></h2>
     </header>
@@ -52,8 +57,11 @@
                 <div class="row borders">
                     <div class="col-md-12">
                         <ul class="list-group-flush list-style-none">
-                            <li class="list-group-item" ng-repeat="item in notes track by $index"><a
-                                    href="#">{{item.title}}<br>{{item.description}}</a></li>
+                            <li class="list-group-item text-capitalize" ng-repeat="item in notes track by $index">
+                                <a href="#">
+                                    <h3>{{item.title}}</h3><br>
+                                    {{item.description}}
+                                </a></li>
                         </ul>
                     </div>
 
@@ -67,15 +75,14 @@
                                 <button type="button" ng-click="saveNotes()"
                                     class="btn btn-primary-outline float-left btn-lg"><i
                                         class="fa fa-check"></i></button>
-                                <button type="button" ng-click="deleteNotes()"
+                                <button type="button" ng-click="clearNotes()"
                                     class="btn  btn-primary-outline float-right btn-lg"><i
                                         class="fa fa-times"></i></i></button>
                             </div>
-                            <input class="form-control w-100" type="text" placeholder="Title here..."
+                            <input class="form-control w-100 text-capitalize" type="text" placeholder="Title here..."
                                 ng-model="noteObj.title"><br>
-                            <textarea class="form-control rounded-1" rows="10" ng-model="noteObj.description"
-                                placeholder="your notes.....">welcome</textarea>
-
+                            <textarea class="form-control rounded-1" rows="10" ng-class="{}"
+                                ng-model="noteObj.description" placeholder="your notes.....">welcome</textarea>
 
                         </div>
                     </div>
@@ -87,7 +94,16 @@
             </div>
         </div>
     </div>
-    <script src="app/notes.js"></script>
+ -->
+    <script src="app/app.js"></script>
+    <script src="app/controllers/notes.js"></script>
+
+    <script src="app/controllers/noteListController.js"></script>
+    <script src="app/controllers/addNoteController.js"></script>
+    <script src="app/controllers/viewNoteController.js"></script>
+    <script src="app/services/notes.factory.js"></script>
+    <script src="app/services/localStorageService.js"></script>
+
 </body>
 
 </html>
