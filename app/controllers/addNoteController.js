@@ -8,16 +8,21 @@
     AddNoteController.$inject = ['$scope', '$location', '$routeParams', 'factoryService'];
 
     function AddNoteController($scope, $location, $routeParams, factoryService) {
-        let index = $routeParams.index;
 
-        if (index === undefined) {
+        let id = $routeParams.id;
+
+        if (id === undefined) {
             $scope.noteObj = {};
         } else {
-            $scope.noteObj = factoryService.getNote(index);
+            $scope.noteObj = factoryService.getNoteById(id);
+
         }
 
-        $scope.saveNotes = function () {
-            factoryService.saveNotes($scope.noteObj);
+
+
+        $scope.saveNotes = function (noteObj1) {
+
+            factoryService.saveNotes(noteObj1);
             $location.path('/');
             $scope.clearNotes();
         };

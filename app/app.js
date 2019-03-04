@@ -10,13 +10,9 @@
                 templateUrl: 'app/templates/noteList.html',
                 controller: 'NoteListController'
             })
-            .when('/addNote/:index?', {
+            .when('/addNote/:id?', {
                 templateUrl: 'app/templates/addNote.html',
                 controller: 'AddNoteController'
-            })
-            .when('/viewNote/:index', {
-                templateUrl: 'app/templates/viewNote.html',
-                controller: 'ViewNoteController'
             });
 
         // configure html5 to get links working on jsfiddle

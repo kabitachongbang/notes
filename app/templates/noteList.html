@@ -8,11 +8,32 @@
                 <div class="col">
                     <span class="float-left"><button ng-click="createNotes()" class="btn btn-primary-outline">
                             <i class="far fa-edit"></i></button></span>
-                    <span> <button type="button" ng-click="clearNotes()"
+                    <span> <button type="button" ng-click="clearAllNotes()"
                             class="btn  btn-primary-outline float-right btn-lg"><i
                                 class="fa fa-times"></i></button></span>
+
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <pre>Sort by={{propertyName}};   descending order?={{reverse}}</pre>
+
+                    <div class=" d-flex justify-content-between btn-group " role="group">
+                        <button class="btn" ng-click="sortBy(null)">set to unsorted</button>
+
+                        <button class="btn" ng-click="sortBy('title')">Sort By Title</button>
+                        <span class="sortorder" ng-show="propertyName==='title'" ng-class="{reverse:reverse}"></span>
+                        <button class="btn" ng-click="sortBy('creationDate')">Sort By Date of Creation</button>
+                        <span class="sortorder" ng-show="propertyName==='creationDate'"
+                            ng-class="{reverse:reverse}"></span>
+                        <button class="btn" ng-click="sortBy('updatedDate')">Sort By Update date</button>
+                        <span class="sortorder" ng-show="propertyName==='updatedDate'"
+                            ng-class="{reverse:reverse}"></span>
+                    </div>
+                </div>
+
+            </div>
+
             <div class="row borders no-gutters">
                 <div class="input-group"> <button class="btn btn-primary-outline disabled"><i class="fas fa-search"
                             aria-hidden="true"></i></button>
@@ -28,12 +49,15 @@
                         <li class="list-group-item text-capitalize"
                             ng-repeat="item in notes |filter:findNotes   track by $index ">
                             <span class="btn-group " role="group">
-                                <button class="btn" ng-click="editItem($index)">edit</button>
-                                <button class="btn " ng-click="deleteItem($index)"><i
+                                <button class="btn" ng-click="editItem(item.id)">edit/ view</button>
+                                <button class="btn " ng-click="deleteItem(item.id)"><i
                                         class="fa fa-times"></i></button></span>
 
-                            <h3>{{item.title }}</h3><br>
-                            {{item.description}}
+                            <h3>{{item.title }}</h3>
+                            <em>Created On: {{item.creationDate|date:format:timezone}}</em><br>
+                            <em>Updated On:{{item.updatedDate|date:format:timezone}}</em><br><br>
+
+                            {{item.description}}<br>
                         </li>
                     </ul>
                 </div>

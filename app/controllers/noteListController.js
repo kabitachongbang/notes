@@ -8,23 +8,42 @@
     NoteListController.$inject = ['$scope', '$location', 'factoryService'];
 
     function NoteListController($scope, $location, factoryService) {
+        $scope.propertyName = 'title';
+        $scope.reverse = true;
 
         $scope.notes = factoryService.getNotes();
-        $scope.noteObj = { title: '', description: '', id: '' };
-
 
         $scope.createNotes = function () {
             $location.path('/addNote');
         };
+        $scope.clearAllNotes = function () {
+            factoryService.clearAllNotes();
+            $scope.notes = factoryService.getNotes();
 
-        $scope.editItem = function (index) {
-            $location.path('/addNote/' + index);
+        };
+        $scope.editItem = function (id) {
+            $location.path('/addNote/' + id);
         };
 
-
-        $scope.deleteItem = function (index) {
-            factoryService.deleteItem(index);
+        $scope.deleteItem = function (id) {
+            factoryService.deleteItem(id);
             $scope.notes = factoryService.getNotes();
+        };
+
+        $scope.sortBy = function (property) {
+            console.log(property);
+            if (property === null) {
+                $scope.reverse = false;
+            }
+
+            else if (property != null || $scope.propertyName === property) {
+                $scope.reverse = !$scope.reverse;
+            } else {
+                $scope.reverse = false;
+            }
+            $scope.propertyName = property;
+            $scope.notes = factoryService.sortBy($scope.propertyName, $scope.reverse);
+
         };
     }
 
