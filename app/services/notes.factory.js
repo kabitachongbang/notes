@@ -41,7 +41,6 @@
             };
 
             let sortBy = function (property, reverse) {
-                console.log(property, reverse);
                 let notes = getNotes();
 
                 return orderBy(notes, property, reverse);

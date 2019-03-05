@@ -22,10 +22,13 @@ font-style:normal;
     
 }
 .sortorder::after{
+/*     black up pointing triangle i.e. ascending order */
     content:'\25b2';
     
 }
 .sortorder.reverse::after{
+/*     black down-pointing triangle i.e. descending order*/
     content:'\25bc';
+
     
 }

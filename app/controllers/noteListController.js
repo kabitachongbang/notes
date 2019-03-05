@@ -5,13 +5,14 @@
         .module('notesApp')
         .controller('NoteListController', NoteListController);
 
-    NoteListController.$inject = ['$scope', '$location', 'factoryService'];
+    NoteListController.$inject = ['$scope', '$location', 'orderByFilter', 'factoryService'];
 
-    function NoteListController($scope, $location, factoryService) {
+    function NoteListController($scope, $location, orderBy, factoryService) {
+        let notes = factoryService.getNotes();
+
         $scope.propertyName = 'title';
         $scope.reverse = true;
-
-        $scope.notes = factoryService.getNotes();
+        $scope.notes = orderBy(notes, $scope.propertyName, $scope.reverse);
 
         $scope.createNotes = function () {
             $location.path('/addNote');
@@ -31,19 +32,16 @@
         };
 
         $scope.sortBy = function (property) {
-            console.log(property);
+
             if (property === null) {
                 $scope.reverse = false;
-            }
-
-            else if (property != null || $scope.propertyName === property) {
+            } else if (property != null || $scope.propertyName === property) {
                 $scope.reverse = !$scope.reverse;
             } else {
                 $scope.reverse = false;
             }
             $scope.propertyName = property;
             $scope.notes = factoryService.sortBy($scope.propertyName, $scope.reverse);
-
         };
     }
 
