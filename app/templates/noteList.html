@@ -1,67 +1,115 @@
-<header class="text-center text-primary">
-    <h2><strong>Welcome to my notes</strong></h2>
+<header class="text-center">
+  <h3 class="notesHeading"><strong>noteApp</strong></h3>
 </header>
-<div class="container">
-    <div class="row ">
-        <div class="notesHome col-md-12 ">
-            <div class="row borders">
-                <div class="col">
-                    <span class="float-left"><button ng-click="createNotes()" class="btn btn-primary-outline">
-                            <i class="far fa-edit"></i></button></span>
-                    <span> <button type="button" ng-click="clearAllNotes()"
-                            class="btn  btn-primary-outline float-right btn-lg"><i
-                                class="fa fa-times"></i></button></span>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <pre>Sort by={{propertyName}};   descending order?={{reverse}}</pre>
-                    <div class=" d-flex justify-content-between btn-group " role="group">
-                        <button class="btn" ng-click="sortBy(null)">set to unsorted</button>
-
-                        <button class="btn" ng-click="sortBy('title')">Sort By Title</button>
-                        <span class="sortorder" ng-show="propertyName==='title'" ng-class="{reverse:reverse}"></span>
-                        <button class="btn" ng-click="sortBy('creationDate')">Sort By Date of Creation</button>
-                        <span class="sortorder" ng-show="propertyName==='creationDate'"
-                            ng-class="{reverse:reverse}"></span>
-                        <button class="btn" ng-click="sortBy('updatedDate')">Sort By Update date</button>
-                        <span class="sortorder" ng-show="propertyName==='updatedDate'"
-                            ng-class="{reverse:reverse}"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row borders no-gutters">
-                <div class="input-group"> <button class="btn btn-primary-outline disabled"><i class="fas fa-search"
-                            aria-hidden="true"></i></button>
-
-                    <input type="text" ng-model="findNotes" class="form-control input-group-form"
-                        placeholder=" search all notes..">
-                </div>
-            </div>
-
-            <div class="row borders">
-                <div class="col-md-12">
-                    <ul class="list-group-flush list-style-none">
-                        <li class="list-group-item text-capitalize"
-                            ng-repeat="item in notes |filter:findNotes   track by $index ">
-                            <span class="btn-group " role="group">
-                                <button class="btn" ng-click="editItem(item.id)">edit/ view</button>
-                                <button class="btn " ng-click="deleteItem(item.id)"><i
-                                        class="fa fa-times"></i></button></span>
-
-                            <h3>{{item.title }}</h3>
-                            <em>Created On: {{item.creationDate|date:format:timezone}}</em><br>
-                            <em>Updated On:{{item.updatedDate|date:format:timezone}}</em><br><br>
-
-                            {{item.description}}<br>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
+<div class="container ">
+  <div class="row ">
+    <div class="notesHome col-md-12 col-sm-6 ">
+      <div class="row borders">
+        <div class="col">
+          <div class="clearfix">
+            <button
+              type="button"
+              ng-click="createNotes()"
+              class="text-info btn btn-primary-outline float-left btn-lg"
+            >
+              Create Note
+            </button>
+            <button
+              type="button"
+              ng-click="clearAllNotes()"
+              class=" text-danger btn  btn-primary-outline float-right btn-lg"
+            >
+              Delete All
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <pre style="color:#33691e">
+Order by={{ propertyName }};   descending order?={{
+              reverse ? "YES" : "NO"
+            }}</pre
+          >
+          <div class=" d-flex justify-content-between btn-group " role="group">
+            <button class="btnsColor btn" ng-click="sortBy(null)">
+              set to original state
+            </button>
+
+            <button class="btnsColor btn" ng-click="sortBy('title')">
+              Sort By Title
+            </button>
+            <span
+              class="sortorder"
+              ng-show="propertyName==='title'"
+              ng-class="{reverse:reverse}"
+            ></span>
+            <button class="btnsColor btn" ng-click="sortBy('creationDate')">
+              Sort By Date of Creation
+            </button>
+            <span
+              class="sortorder"
+              ng-show="propertyName==='creationDate'"
+              ng-class="{reverse:reverse}"
+            ></span>
+            <button class="btnsColor btn" ng-click="sortBy('updatedDate')">
+              Sort By Update date
+            </button>
+            <span
+              class="sortorder"
+              ng-show="propertyName==='updatedDate'"
+              ng-class="{reverse:reverse}"
+            ></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row borders no-gutters">
+        <input
+          type="text"
+          ng-model="findNotes"
+          class="form-control input-group-form"
+          placeholder=" search all notes.."
+        />
+      </div>
+
+      <div class="row borders listContent">
+        <div class="col-md-12">
+          <ul class="notesDisplayList list-group-flush list-style-none">
+            <li
+              class="list-group-item "
+              ng-repeat="item in notes |filter:findNotes   track by $index "
+            >
+              <div class="clearfix">
+                <button
+                  class="btnsColor btn float-left"
+                  ng-click="editItem(item.id)"
+                >
+                  edit/ view
+                </button>
+                <button
+                  class="text-danger btn float-right"
+                  ng-click="deleteItem(item.id)"
+                >
+                  delete
+                </button>
+              </div>
+
+              <h3 class="notesHeading text-capitalize">{{ item.title }}</h3>
+              <code class="text-secondary"
+                >Created On:
+                {{ item.creationDate | date: format:timezone }}</code
+              ><br />
+              <code class="text-secondary"
+                >Updated On:{{ item.updatedDate | date: format:timezone }}</code
+              ><br /><br />
+
+              <p class="text-capitalize">{{ item.description }}</p>
+              <br />
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
