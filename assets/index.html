@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="assets/stylesheet/style.css" type="text/css" />
+  </head>
+
+  <body ng-app="notesApp">
+    <div class="text-center col-md-12">
+      <a href="#!/">
+        <button type="button" class="btnsColor btn ">List of notes</button>
+      </a>
+      <a href="#!/addNote">
+        <button type="button" class="btnsColor btn ">
+          add/edit note
+        </button>
+      </a>
+    </div>
+    <div ng-view></div>
+
+    <script src="app/app.js"></script>
+
+    <script src="app/controllers/noteListController.js"></script>
+    <script src="app/controllers/addNoteController.js"></script>
+    <script src="app/services/notes.factory.js"></script>
+    <script src="app/services/localStorageService.js"></script>
+  </body>
+</html>
